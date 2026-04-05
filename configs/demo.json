@@ -1,0 +1,54 @@
+{
+  "run_id": "demo-httpbin-001",
+  "mode": "benchmark",
+  "backend": "curl_cffi",
+  "connection_mode": "cold_socket",
+
+  "targets": [
+    {
+      "id": "httpbin-put",
+      "url": "https://httpbin.org/put",
+      "method": "PUT",
+      "body": {"probe": true, "source": "edgebench"},
+      "auth_mode": "none",
+      "expected_status": 200,
+      "idempotent": true
+    }
+  ],
+
+  "identities": [
+    {
+      "profile": "chrome124",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "label": "chrome124-win"
+    },
+    {
+      "profile": "firefox124",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0",
+      "label": "firefox124-win"
+    },
+    {
+      "profile": "safari17_2",
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.15",
+      "label": "safari17-mac"
+    }
+  ],
+
+  "proxies": [],
+
+  "warmup_runs": 2,
+  "measured_runs": 5,
+  "inter_request_gap_ms": 200,
+  "per_group_cooldown_ms": 500,
+  "randomize_order": false,
+  "seed": 42,
+
+  "global_concurrency": 5,
+  "per_host_concurrency": 3,
+  "per_proxy_concurrency": 3,
+
+  "retry_policy": "disabled",
+  "cache_bust_policy": "query_param",
+  "raw_jsonl": true,
+  "output_dir": "./results"
+}
